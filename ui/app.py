@@ -181,6 +181,7 @@ def main_page(config):
     )
 
     video_path = None
+    current_video_name = None
 
     if input_method == "上传视频文件":
         uploaded_file = st.file_uploader(
@@ -191,6 +192,7 @@ def main_page(config):
 
         if uploaded_file:
             # 保存上传的文件
+            current_video_name = uploaded_file.name
             video_path = f"temp/{uploaded_file.name}"
             os.makedirs("temp", exist_ok=True)
             with open(video_path, "wb") as f:
@@ -205,11 +207,23 @@ def main_page(config):
         )
         if local_path and os.path.exists(local_path):
             video_path = local_path
+            current_video_name = os.path.basename(local_path)
             st.success(f"✓ 已加载: {local_path}")
         elif local_path:
             st.error(f"文件不存在: {local_path}")
 
+    # 检测视频是否变化，如果变化则清除之前的结果
     if video_path:
+        # 检查是否是新的视频
+        if st.session_state.get("current_video_name") != current_video_name:
+            # 清除之前的结果
+            st.session_state.current_video_name = current_video_name
+            st.session_state.processed = False
+            st.session_state.summary = None
+            st.session_state.transcript = None
+            st.session_state.slides = None
+            st.session_state.video_info = None
+            st.session_state.pdf_data = None
 
         # 显示视频信息
         from video import get_video_info
@@ -235,8 +249,10 @@ def main_page(config):
         # 保存video_path到session state
         st.session_state.video_path = video_path
 
-        # 检查是否已经处理过
-        if st.session_state.get("processed") and st.session_state.get("summary"):
+        # 检查是否已经处理过当前视频
+        if (st.session_state.get("processed") and
+            st.session_state.get("summary") and
+            st.session_state.get("current_video_name") == current_video_name):
             # 显示已有结果
             display_results()
         else:
