@@ -41,6 +41,7 @@ class APIManager:
             self.config = {
                 "provider": "openai",
                 "model": "gpt-4o-mini",
+                "minimax_group_id": "",
             }
             self._save_config()
 
@@ -100,6 +101,15 @@ class APIManager:
     def set_model(self, model: str):
         """设置当前模型"""
         self.config["model"] = model
+        self._save_config()
+
+    def get_minimax_group_id(self) -> str:
+        """获取MiniMax Group ID"""
+        return self.config.get("minimax_group_id", "")
+
+    def set_minimax_group_id(self, group_id: str):
+        """设置MiniMax Group ID"""
+        self.config["minimax_group_id"] = group_id
         self._save_config()
 
     def get_all_keys(self) -> Dict[str, str]:

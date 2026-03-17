@@ -4,6 +4,11 @@
 import os
 from pathlib import Path
 
+# 设置ffmpeg路径
+ffmpeg_bin = r"C:\Users\26299\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.0.1-full_build\bin"
+if os.path.exists(ffmpeg_bin):
+    os.environ['PATH'] = ffmpeg_bin + os.pathsep + os.environ.get('PATH', '')
+
 import ffmpeg
 
 

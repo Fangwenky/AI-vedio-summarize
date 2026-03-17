@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(streamlit run:*)",
+      "Bash(set KMP_DUPLICATE_LIB_OK=TRUE:*)",
+      "Bash(cmd:*)",
+      "Bash(powershell:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(where ffmpeg:*)",
+      "Bash(winget install:*)",
+      "WebSearch",
+      "WebFetch(domain:platform.minimaxi.com)",
+      "WebFetch(domain:www.minimaxi.com)"
+    ]
+  }
+}

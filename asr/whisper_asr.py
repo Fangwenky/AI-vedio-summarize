@@ -40,12 +40,12 @@ class WhisperASR:
         """
         self.load_model()
 
-        # 转写参数
+        # 转写参数 - 禁用word_timestamps避免bug
         result = self.model.transcribe(
             audio_path,
             language=self.language,
             verbose=verbose,
-            word_timestamps=True,
+            word_timestamps=False,
         )
 
         # 转换为标准格式
@@ -73,11 +73,12 @@ class WhisperASR:
         """
         self.load_model()
 
+        # 禁用word_timestamps避免兼容性问题
         result = self.model.transcribe(
             audio_path,
             language=self.language,
             verbose=False,
-            word_timestamps=True,
+            word_timestamps=False,
         )
 
         return {

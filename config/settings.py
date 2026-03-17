@@ -59,6 +59,11 @@ LLM_PROVIDERS = {
     },
     "minimax": {
         "name": "MiniMax",
-        "models": ["abab6.5s-chat", "abab6.5g-chat"],
+        "models": [
+            "MiniMax-M2.5",
+            "MiniMax-M2.5-highspeed",
+            "MiniMax-M2.1",
+            "MiniMax-M2",
+        ],
     },
 }
